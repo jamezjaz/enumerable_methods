@@ -35,7 +35,14 @@ module Enumerable
         end 
         return false
     end
+
+    def my_none?
+        for item in self do
+          return false if yield(item)
+        end 
+        return true
+    end
 end
 
-arr = [1, 3, 4, 4, 10]
-p arr.my_any? {|num| num % 6 == 4 }
+# arr = [1, 3, 4, 4, 10]
+# p arr.my_none? {|num| num % 3 == 1 }
