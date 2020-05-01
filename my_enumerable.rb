@@ -12,7 +12,15 @@ module Enumerable
             i += 1
         end 
     end
+
+    def my_select
+        new_arr = []
+        for item in self do 
+          new_arr.push(item) if yield(item)
+        end  
+        new_arr
+    end
 end
 
-# arr = [1, 2, 3, 4]
-# arr.my_each_with_index {|num| p num * 2}
+arr = [1, 2, 3, 4]
+p arr.my_select {|num| num % 2 == 0 }
