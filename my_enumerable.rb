@@ -20,7 +20,15 @@ module Enumerable
         end  
         new_arr
     end
+
+    def my_all?
+        result = true
+        for item in self do
+          return false if yield(item) == false
+        end 
+        result
+    end
 end
 
-arr = [1, 2, 3, 4]
-p arr.my_select {|num| num % 2 == 0 }
+# arr = [10, 2, 40, 4, 1002]
+# p arr.my_all? {|num| num % 2 == 0 }
