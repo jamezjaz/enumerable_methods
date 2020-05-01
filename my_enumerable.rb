@@ -28,7 +28,14 @@ module Enumerable
         end 
         result
     end
+
+    def my_any?
+        for item in self do
+          return true if yield(item)
+        end 
+        return false
+    end
 end
 
-# arr = [10, 2, 40, 4, 1002]
-# p arr.my_all? {|num| num % 2 == 0 }
+arr = [1, 3, 4, 4, 10]
+p arr.my_any? {|num| num % 6 == 4 }
