@@ -42,7 +42,20 @@ module Enumerable
         end 
         return true
     end
+
+    def my_count
+        counter = 0
+        for item in self
+          if yield(item)
+            counter += 1
+          end
+        end
+        counter
+      end
 end
 
-# arr = [1, 3, 4, 4, 10]
-# p arr.my_none? {|num| num % 3 == 1 }
+# arr = ["car", "milk", "pan", "java", "ruby"]
+# p arr.my_count {|x| x.length}
+
+# arr = [1, 3, 4, 4, 10, 9, 21, 30]
+# p arr.my_count {|num| num % 3 == 0}
