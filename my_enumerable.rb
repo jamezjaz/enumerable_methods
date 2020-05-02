@@ -52,10 +52,15 @@ module Enumerable
         end
         counter
       end
+
+    def my_map
+        new_arr = []
+        for item in self do 
+          new_arr << yield(item)
+        end  
+        new_arr
+    end 
 end
 
-# arr = ["car", "milk", "pan", "java", "ruby"]
-# p arr.my_count {|x| x.length}
-
-# arr = [1, 3, 4, 4, 10, 9, 21, 30]
-# p arr.my_count {|num| num % 3 == 0}
+arr = [1, 3, 4, 4, 10, 9, 21, 30]
+p arr.my_map {|num| num < 5}
