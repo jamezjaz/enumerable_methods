@@ -76,9 +76,17 @@ module Enumerable
       end  
       new_arr
     end
+
+    def my_inject
+      sum = self[0]
+      for item in self.length do
+        sum = yield(sum, item)
+      end
+      sum
+    end
 end
 
-# Test cases for my_map_with_proc_or_block
-# arr = [2, 3, 6, 80, 27, 10]
-# p arr.my_map_with_proc_or_block { |sum, item| sum % 3 == 0 }
-# Should return [true, true, true, true, false, false, false, false]
+# Test cases for my_inject
+arr = [2, 3, 4, 5, 6, 7, 10, 20]
+p arr.inject { |sum, item| sum + item }
+# Should return 57
