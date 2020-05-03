@@ -86,7 +86,8 @@ module Enumerable
     end
 end
 
-# Test cases for my_inject
-arr = [2, 3, 4, 5, 6, 7, 10, 20]
-p arr.inject { |sum, item| sum + item }
-# Should return 57
+def multiply_els(arr)
+  arr.my_inject { |product, item| product * item }
+end
+
+p multiply_els([2, 4, 5])
