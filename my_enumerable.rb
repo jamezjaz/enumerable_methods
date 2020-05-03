@@ -46,9 +46,7 @@ module Enumerable
   def my_count
     counter = 0
     for item in self
-      if yield(item)
-        counter += 1
-      end
+      counter += 1 if yield(item)
     end
     counter
   end
@@ -79,7 +77,7 @@ module Enumerable
 
   def my_inject
     sum = self[0]
-    self.my_each {|i| sum = yield(sum, i)}
+    self.my_each { |i| sum = yield(sum, i)}
     sum
   end
 end
