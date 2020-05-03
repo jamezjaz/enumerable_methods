@@ -9,7 +9,7 @@ module Enumerable
     i = 0
     for item in self do
       yield(item, i)
-        i += 1
+      i += 1
     end
   end
 
@@ -33,14 +33,14 @@ module Enumerable
     for item in self do
       return true if yield(item)
     end
-    return false
+    false
   end
 
   def my_none?
     for item in self do
       return false if yield(item)
     end
-    return true
+    true
   end
 
   def my_count
@@ -79,9 +79,7 @@ module Enumerable
 
   def my_inject
     sum = self[0]
-    for item in self.length do
-      sum = yield(sum, item)
-    end
+    self.my_each {|i| sum = yield(sum, i)}
     sum
   end
 end
@@ -90,4 +88,4 @@ def multiply_els(arr)
   arr.my_inject { |product, item| product * item }
 end
 
-p multiply_els([2, 3, 6])
+p multiply_els([2, 4, 5])
