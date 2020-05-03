@@ -77,7 +77,9 @@ module Enumerable
 
   def my_inject
     sum = self[0]
-    self.my_each { |i| sum = yield(sum, i)}
+    for item in self do
+      sum = yield(sum, item)
+    end
     sum
   end
 end
