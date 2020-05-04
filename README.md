@@ -2,7 +2,7 @@
 This is an implementation of enumerable methods in Ruby. Here, I recreated the ruby enumerable methods.
 
 ## Preview
-![enumerable_methods](https://user-images.githubusercontent.com/57812000/81002719-55998700-8e0f-11ea-8973-792d405051b5.png)
+![enumerable_methods](https://user-images.githubusercontent.com/57812000/81003370-672f5e80-8e10-11ea-9c66-bf6c38a11ca2.png)
 
 ## Built With
 
@@ -11,7 +11,7 @@ This is an implementation of enumerable methods in Ruby. Here, I recreated the r
 ## Getting Started
 - Clone this [repo](git@github.com:jamezjaz/enumerable_methods.git) on your local machine 
 - Run the command `bundle install` in your terminal
-- Insert the test cases outside the module
+- Insert the test cases outside the module. Click on Live Demo to see the cases
 
 ### Prerequisites
 To make this repository working in your local machine you need [ruby](https://rubyinstaller.org/) installed.
