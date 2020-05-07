@@ -24,6 +24,8 @@ module Enumerable
   end
 
   def my_select
+    return to_enum(:my_select) unless block_given?
+
     new_arr = []
     for item in self do
       new_arr.push(item) if yield(item)
