@@ -110,26 +110,19 @@ module Enumerable
     counter
   end
 
-  def my_map
-    new_arr = []
-    for item in self do
-      new_arr << yield(item)
-    end
-    new_arr
-  end
+  def my_map(proc = nil)
+    return to_enum(:my_map) if block_given? == false
 
-  def my_map_with_proc
     new_arr = []
-    for item in self do
-      new_arr << proc.call(item)
+    if proc.nil?
+      my_each do |item|
+        new_arr << yield(item)
+      end
     end
-    new_arr
-  end
-
-  def my_map_with_proc_or_block
-    new_arr = []
-    for item in self
-      new_arr << proc.call(item) || yield(item)
+    if block_given? && proc
+      my_each do |item|
+        new_arr << proc.call(item)
+      end
     end
     new_arr
   end
