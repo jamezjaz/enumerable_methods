@@ -1,5 +1,7 @@
 # rubocop: disable Metrics/PerceivedComplexity: Perceived complexity for my_any? is too high. [11/7]
 # rubocop: disable Metrics/CyclomaticComplexity: Cyclomatic complexity for my_any? is too high. [10/6]
+# rubocop: disable Metrics/ModuleLength: Module has too many lines. [135/100]
+# rubocop: disable Style/For: Prefer each over for
 module Enumerable
   def my_each
     return to_enum(:my_each) unless block_given?
@@ -127,12 +129,26 @@ module Enumerable
     new_arr
   end
 
-  def my_inject
-    sum = self[0]
-    for item in self do
-      sum = yield(sum, item)
+  def my_inject(initial_arg = nil, symbol = nil)
+    array = to_a
+    n = array.length
+    if initial_arg.nil?
+      result = array[0]
+      array[1..n - 1].my_each { |item| result = yield(result, item) }
+    elsif block_given?
+      result = initial_arg
+      array.my_each { |item| result = yield(result, item) }
+    elsif initial_arg && symbol
+      result = initial_arg
+      array.my_each { |item| result = result.send(symbol, item) }
+    elsif initial_arg.is_a? Integer
+      result = initial_arg
+      array.my_each { |item| result += item }
+    else
+      result = array[0]
+      array[1..n - 1].my_each { |item| result = result.send(initial_arg, item) }
     end
-    sum
+    result
   end
 end
 
@@ -144,3 +160,5 @@ p multiply_els([2, 4, 5])
 
 # rubocop: enable Metrics/PerceivedComplexity: Perceived complexity for my_any? is too high. [11/7]
 # rubocop: enable Metrics/CyclomaticComplexity: Cyclomatic complexity for my_any? is too high. [10/6]
+# rubocop: enable Metrics/ModuleLength: Module has too many lines. [135/100]
+# rubocop: enable Style/For: Prefer each over for
