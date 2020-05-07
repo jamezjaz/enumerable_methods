@@ -21,12 +21,21 @@ module Enumerable
     new_arr
   end
 
-  def my_all?
-    result = true
-    for item in self do
-      return false if yield(item) == false
+  def my_all?(*args)
+    if args.nil?
+      my_each do item 
+        return false unless args === item 
+      end
+    elsif block_given?
+      my_each do item
+        return false unless yield(item)
+      end
+    else
+      my_each do item
+        return false unless item 
+      end
     end
-    result
+    true
   end
 
   def my_any?
