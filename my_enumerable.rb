@@ -85,8 +85,8 @@ module Enumerable
         return false if yield(item)
       end
     elsif args.is_a? Hash
-      my_each do |x, y|
-        return false if yield(x, y)
+      my_each do |y, z|
+        return false if yield(y, z)
       end
     end
     true
