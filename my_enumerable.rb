@@ -40,12 +40,26 @@ module Enumerable
   #   true
   # end
 
-  # def my_any?
-  #   for item in self do
-  #     return true if yield(item)
-  #   end
-  #   false
-  # end
+  def my_any?(args = nil)
+    if !block_given? && args.nil?
+      my_each do |item|
+        return true if item
+      end
+    elsif args.is_a? Regexp
+      my_each do |item|
+        return true if args == item
+      end
+    elsif args.is_a? Array
+      my_each do |item|
+        return true if yield(item)
+      end
+    elsif args.is_a? Hash
+      my_each do |x, y|
+        return true if yield(x, y)
+      end
+    end
+    false
+  end
 
   def my_none?(args = nil)
     if !block_given? && args.nil?
@@ -110,25 +124,25 @@ module Enumerable
 end
 
 # Test cases for my_any?
-# true_array = [nil, false, true, []]
-# true_array.my_any? == true_array.any? # true
-
-# words = %w[dog door rod blade]
-# words.my_any?(Integer) == words.any?(Integer) # true
-
-# words.my_any?(/z/) == words.any?(/z/) # true
-
-# words.my_any?('cat') == words.any?('cat') # true
-
-# Test cases for my_none?
-array = Array.new(100) { rand(0...9) }
-array.my_none?(String) == true #true
+true_array = [nil, false, true, []]
+true_array.my_any? == true_array.any? # true
 
 words = %w[dog door rod blade]
-words.my_none?(5) == words.none?(5) #true
+words.my_any?(Integer) == words.any?(Integer) # true
 
- words.my_none?(/z/) == words.none?(/z/) #true
- words.my_none?(/f/) == words.none?(/f/) #true
+words.my_any?(/z/) == words.any?(/z/) # true
+
+words.my_any?('cat') == words.any?('cat') # true
+
+# Test cases for my_none?
+# array = Array.new(100) { rand(0...9) }
+# array.my_none?(String) == true #true
+
+# words = %w[dog door rod blade]
+# words.my_none?(5) == words.none?(5) #true
+
+#  words.my_none?(/z/) == words.none?(/z/) #true
+#  words.my_none?(/f/) == words.none?(/f/) #true
 
 # def multiply_els(arr)
 #   arr.my_inject { |product, item| product * item }
