@@ -92,10 +92,20 @@ module Enumerable
     true
   end
 
-  def my_count
+  def my_count(args = nil)
     counter = 0
-    for item in self
-      counter += 1 if yield(item)
+    if block_given?
+      my_each do |item|
+        counter += 1 if yield(item)
+      end
+    elsif args
+      my_each do |item|
+        counter += 1 if item == args
+      end
+    else
+      my_each do
+        counter += 1
+      end
     end
     counter
   end
