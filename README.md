@@ -2,7 +2,7 @@
 This is an implementation of enumerable methods in Ruby. Here, I recreated the ruby enumerable methods.
 
 ## Preview
-![enumerable_methods](https://user-images.githubusercontent.com/57812000/81003370-672f5e80-8e10-11ea-9c66-bf6c38a11ca2.png)
+![enumerable_methods](https://user-images.githubusercontent.com/57812000/81355759-141a0d80-9095-11ea-9eae-5f220084c107.png)
 
 ## Built With
 
