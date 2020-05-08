@@ -1,5 +1,3 @@
-# rubocop: disable Metrics/PerceivedComplexity:
-# rubocop: disable Metrics/CyclomaticComplexity:
 # rubocop: disable Metrics/ModuleLength:
 # rubocop: disable Style/For:
 # rubocop: disable Style/CaseEquality:
@@ -71,21 +69,17 @@ module Enumerable
   end
 
   def my_none?(args = nil)
-    if !block_given? && args.nil?
+    if args.nil?
       my_each do |item|
         return false if item
       end
-    elsif args.is_a? Regexp
-      my_each do |item|
-        return false if item == args
-      end
-    elsif args.is_a? Array
+    elsif block_given?
       my_each do |item|
         return false if yield(item)
       end
-    elsif args.is_a? Hash
-      my_each do |y, z|
-        return false if yield(y, z)
+    else
+      my_each do |item|
+        return false if args === item
       end
     end
     true
@@ -155,8 +149,6 @@ end
 
 p multiply_els([2, 4, 5])
 
-# rubocop: enable Metrics/PerceivedComplexity:
-# rubocop: enable Metrics/CyclomaticComplexity:
 # rubocop: enable Metrics/ModuleLength:
 # rubocop: enable Style/For:
 # rubocop: enable Style/CaseEquality:
