@@ -1,7 +1,8 @@
-# rubocop: disable Metrics/PerceivedComplexity: Perceived complexity for my_any? is too high. [11/7]
-# rubocop: disable Metrics/CyclomaticComplexity: Cyclomatic complexity for my_any? is too high. [10/6]
-# rubocop: disable Metrics/ModuleLength: Module has too many lines. [135/100]
-# rubocop: disable Style/For: Prefer each over for
+# rubocop: disable Metrics/PerceivedComplexity:
+# rubocop: disable Metrics/CyclomaticComplexity:
+# rubocop: disable Metrics/ModuleLength:
+# rubocop: disable Style/For:
+# rubocop: disable Style/CaseEquality:
 module Enumerable
   def my_each
     return to_enum(:my_each) unless block_given?
@@ -35,10 +36,10 @@ module Enumerable
     new_arr
   end
 
-  def my_all?(*args)
+  def my_all?(args = nil)
     if args.nil?
       my_each do |item|
-        return false unless args == item
+        return false unless item
       end
     elsif block_given?
       my_each do |item|
@@ -46,7 +47,7 @@ module Enumerable
       end
     else
       my_each do |item|
-        return false unless item
+        return false unless args === item
       end
     end
     true
@@ -158,7 +159,8 @@ end
 
 p multiply_els([2, 4, 5])
 
-# rubocop: enable Metrics/PerceivedComplexity: Perceived complexity for my_any? is too high. [11/7]
-# rubocop: enable Metrics/CyclomaticComplexity: Cyclomatic complexity for my_any? is too high. [10/6]
-# rubocop: enable Metrics/ModuleLength: Module has too many lines. [135/100]
-# rubocop: enable Style/For: Prefer each over for
+# rubocop: enable Metrics/PerceivedComplexity:
+# rubocop: enable Metrics/CyclomaticComplexity:
+# rubocop: enable Metrics/ModuleLength:
+# rubocop: enable Style/For:
+# rubocop: enable Style/CaseEquality:
