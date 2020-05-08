@@ -54,21 +54,17 @@ module Enumerable
   end
 
   def my_any?(args = nil)
-    if !block_given? && args.nil?
+    if args.nil?
       my_each do |item|
         return true if item
       end
-    elsif args.is_a? Regexp
-      my_each do |item|
-        return true if args == item
-      end
-    elsif args.is_a? Array
+    elsif block_given?
       my_each do |item|
         return true if yield(item)
       end
-    elsif args.is_a? Hash
-      my_each do |x, y|
-        return true if yield(x, y)
+    else
+      my_each do |item|
+        return true if args === item
       end
     end
     false
