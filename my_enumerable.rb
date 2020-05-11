@@ -1,6 +1,4 @@
-# rubocop: disable Metrics/ModuleLength:
-# rubocop: disable Style/For:
-# rubocop: disable Style/CaseEquality:
+# rubocop: disable Metrics/ModuleLength, Style/For, Style/CaseEquality
 module Enumerable
   def my_each
     return to_enum(:my_each) unless block_given?
@@ -63,20 +61,17 @@ module Enumerable
   end
 
   def my_none?(args = nil)
-    if args.nil?
-      my_each do |item|
-        return false if item
-      end
-    elsif block_given?
-      my_each do |item|
-        return false if yield(item)
-      end
-    else
-      my_each do |item|
-        return false if args === item
+    result = true
+    my_each do |item|
+      if block_given?
+        result = false if yield item
+      elsif args.nil?
+        result = false if item
+      elsif args === item
+        my_each { |_item| result = false }
       end
     end
-    true
+    result
   end
 
   def my_count(args = nil)
@@ -143,6 +138,4 @@ end
 
 p multiply_els([2, 4, 5])
 
-# rubocop: enable Metrics/ModuleLength:
-# rubocop: enable Style/For:
-# rubocop: enable Style/CaseEquality:
+# rubocop: enable Metrics/ModuleLength, Style/For, Style/CaseEquality
