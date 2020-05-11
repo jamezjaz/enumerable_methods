@@ -35,20 +35,17 @@ module Enumerable
   end
 
   def my_all?(args = nil)
-    if args.nil?
-      my_each do |item|
-        return false unless item
-      end
-    elsif block_given?
-      my_each do |item|
-        return false unless yield(item)
-      end
-    else
-      my_each do |item|
-        return false unless args === item
+    result = true
+    my_each do |item|
+      if block_given?
+        result = false unless yield(item)
+      elsif args.nil?
+        result = false unless item
+      else
+        result = false unless args === item
       end
     end
-    true
+    result
   end
 
   def my_any?(args = nil)
