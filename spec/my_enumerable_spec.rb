@@ -24,7 +24,6 @@ describe Enumerable do
         end
 
         it 'returns a new array based on some arguments' do
-            # array1.my_each { |item| new_array.push(item) if item.even? && item > 0 }
             array1.my_each { |item| new_array << item if item.even? && item > 0 }
 
             expect(new_array).to eql(array4)
