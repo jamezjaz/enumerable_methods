@@ -191,3 +191,12 @@ describe Enumerable do
     end
   end
 end
+
+RSpec.describe do
+  describe 'multiply_els' do
+    let(:my_arr) { [2, 4, 5] }
+    it 'returns product of numbers in an array' do
+      expect(multiply_els(my_arr)).to be(40)
+    end
+  end
+end
