@@ -116,4 +116,26 @@ describe Enumerable do
             expect(my_result).to be true
         end
     end
+
+    describe '#my_none?' do
+        it 'returns true if none of the words in the array has a length equal to 2' do
+            result = array2.my_none?{ |word| word.length == 2}
+            expect(result).to be true
+        end
+
+        it 'returns false if any of the words in an array has a length equal to 3' do
+            res = array2.my_none?{ |word| word.length == 3}
+            expect(res).to be false
+        end
+
+        it 'returns false if a specific alphabetic exist in any of the words' do
+            my_res = array2.my_none?(/t/)
+            expect(my_res).to be false
+        end
+
+        it 'returns false if any of the items is numeric in an array' do
+            my_result = my_num.my_none?(Numeric)
+            expect(my_result).to be false
+        end
+    end
 end
