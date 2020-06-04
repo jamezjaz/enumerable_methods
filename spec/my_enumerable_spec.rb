@@ -138,4 +138,25 @@ describe Enumerable do
             expect(my_result).to be false
         end
     end
+
+    describe '#my_count' do
+        it 'returns to number of elements divisible by 2' do
+            result = array1.my_count { |item| item.even? }
+            expect(result).to be(5)
+        end
+
+        it 'returns the number of uppercase words' do 
+            result = array2.my_count { |item| item == item.upcase }
+            expect(result).to be(0)
+        end
+
+        it 'returns the number of a particular element in an array' do
+            result = array6.my_count(4)
+            expect(result).to be(5)
+        end
+
+        it 'returns the number of all elements in an array' do
+            expect(array6.my_count).to be(9)
+        end
+    end
 end
