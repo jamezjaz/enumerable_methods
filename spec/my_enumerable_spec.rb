@@ -95,5 +95,25 @@ describe Enumerable do
         end
     end
 
-    
+    describe '#my_any?' do
+        it 'returns true if the length of any of the words in an array is greater than 3 or equal' do
+            result = array2.my_any?{ |word| word.length >= 3}
+            expect(result).to be true
+        end
+
+        it 'returns true if length of any of the words in an array is greater than 4 or equal' do
+            res = array2.my_any?{ |word| word.length >= 4}
+            expect(res).to be true
+        end
+
+        it 'returns true if a specific alphabetic exist in any of the words' do
+            my_res = array2.my_any?(/t/)
+            expect(my_res).to be true
+        end
+
+        it 'returns true if any of the items is numeric' do
+            my_result = my_num.my_any?(Numeric)
+            expect(my_result).to be true
+        end
+    end
 end
