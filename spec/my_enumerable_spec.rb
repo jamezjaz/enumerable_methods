@@ -12,7 +12,6 @@ describe Enumerable do
   let(:new_array) { [] }
   let(:my_hash) { { 6 => 6, 8 => 8 } }
   let(:my_num) { [1, 2i, 3.14] }
-  let(:array_range) { (5..6) }
   let(:hash) { {} }
 
   describe '#my_each' do
@@ -169,6 +168,26 @@ describe Enumerable do
 
     it 'returns the opposite of the boleans' do
       expect(array2.my_map(&:upcase)).to eql(array8)
+    end
+
+    it 'returns enumerator when there is no block' do
+      expect(array1.my_map).to be_kind_of(Enumerator)
+    end
+  end
+
+  describe '#my_inject' do
+    it 'returns sum of all numbers in a specific range' do
+      expect((5..10).my_inject(:+)).to be(45)
+      expect((5..10).my_inject { |sum, n| sum + n }).to be(45)
+    end
+
+    it 'returns the product of numbers multplied by the accumulator' do
+      expect((5..10).my_inject(2, :*)).to be(302_400)
+      expect((5..10).my_inject(1) { |product, n| product * n }).to be(151_200)
+    end
+
+    it 'returns the longest word in an array' do
+      expect(array2.my_inject { |memo, word| memo.length > word.length ? memo : word }).to eql('microverse')
     end
   end
 end
