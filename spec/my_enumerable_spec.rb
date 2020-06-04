@@ -9,6 +9,7 @@ describe Enumerable do
     let(:array6) { [4, 2, 3, 4, 4, 3, 5, 4, 4] }
     let(:array7) { [1, 3, 5, 7, 9] }
     let(:new_array) { [] }
+    let(:my_hash) { {6=>6, 8=>8} }
 
     describe '#my_each' do
         it 'passes each item to a new array based on some operations' do
@@ -43,6 +44,13 @@ describe Enumerable do
 
         it 'returns the Enumerator when no block is given' do
             expect(array6.my_each_with_index).to be_kind_of(Enumerator)
+        end
+
+        it 'returns the index position and element when specific results are wanted' do
+            hash = Hash.new
+            array1.my_each_with_index {|item, index| hash[item] = index if item.even? && item > 4}
+            expect(my_hash).to eql(hash)
+
         end
     end
 
