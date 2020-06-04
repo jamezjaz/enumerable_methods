@@ -139,9 +139,3 @@ end
 p multiply_els([2, 4, 5])
 
 # rubocop: enable Metrics/ModuleLength, Style/For, Style/CaseEquality
-
-array = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9]
-hash = Hash.new
-array.my_each_with_index {|item, index| hash[item] = index if item.even? && item > 4}
-
-p hash

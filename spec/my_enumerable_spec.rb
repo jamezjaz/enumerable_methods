@@ -10,6 +10,7 @@ describe Enumerable do
     let(:array7) { [1, 3, 5, 7, 9] }
     let(:new_array) { [] }
     let(:my_hash) { {6=>6, 8=>8} }
+    let(:my_num) { [1, 2i, 3.14] }
 
     describe '#my_each' do
         it 'passes each item to a new array based on some operations' do
@@ -72,4 +73,27 @@ describe Enumerable do
         end
     end
 
+    describe '#my_all?' do
+        it 'returns true if the length of all the words in an array is greater than 3 or equal' do
+            result = array2.my_all?{ |word| word.length >= 3}
+            expect(result).to be true
+        end
+
+        it 'returns false if length of all the words in an array is not greater than 4 or equal' do
+            res = array2.my_all?{ |word| word.length >= 4}
+            expect(res).to be false
+        end
+
+        it 'returns false if a specific alphabetic does not exist in all the words' do
+            my_res = array2.my_all?(/t/)
+            expect(my_res).to be false
+        end
+
+        it 'returns true if all are numeric' do
+            my_result = my_num.my_all?(Numeric)
+            expect(my_result).to be true
+        end
+    end
+
+    
 end
