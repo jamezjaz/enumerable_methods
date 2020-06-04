@@ -35,6 +35,18 @@ describe Enumerable do
         end
     end
 
+    describe '#my_each_with_index' do
+        it 'returns element and index when argument is passed' do
+            array6.my_each_with_index { |item, idx| new_array << "#{item} : #{idx}" }
+
+            expect(new_array).to eql(["4 : 0", "2 : 1", "3 : 2", "4 : 3", "4 : 4", "3 : 5", "5 : 6", "4 : 7", "4 : 8"])
+        end
+
+        it 'returns the Enumerator when no block is given' do
+            expect(array6.my_each_with_index).to be_kind_of(Enumerator)
+        end
+    end
+
     describe '#my_select' do
         it 'returns new array based on argument passed' do
             array1.my_select { |item| new_array << item if item > 0 and item % 2 == 1 }
