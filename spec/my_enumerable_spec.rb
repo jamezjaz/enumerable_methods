@@ -8,6 +8,8 @@ describe Enumerable do
     let(:array5) { [2, 4, 6, 8, 'jersey', %w[why me cr7 oa7]] }
     let(:array6) { [4, 2, 3, 4, 4, 3, 5, 4, 4] }
     let(:array7) { [1, 3, 5, 7, 9] }
+    let(:array8) { [false, true] }
+    let(:array9) { [true, false] }
     let(:new_array) { [] }
     let(:my_hash) { {6=>6, 8=>8} }
     let(:my_num) { [1, 2i, 3.14] }
@@ -157,6 +159,17 @@ describe Enumerable do
 
         it 'returns the number of all elements in an array' do
             expect(array6.my_count).to be(9)
+        end
+    end
+
+    describe '#my_map' do
+        it 'returns a new array when argument is passed' do
+            result = array3.my_map { |item| item * 2 }
+            expect(result).to eql(array4)
+        end
+
+        it 'returns the opposite of the boleans' do
+            expect(array8.my_map{ |bool| !bool }).to eql(array9)
         end
     end
 end
