@@ -1,6 +1,4 @@
-# rubocop: disable Metrics/ModuleLength:
-# rubocop: disable Style/For:
-# rubocop: disable Style/CaseEquality:
+# rubocop: disable Metrics/ModuleLength, Style/For, Style/CaseEquality
 module Enumerable
   def my_each
     return to_enum(:my_each) unless block_given?
@@ -140,6 +138,4 @@ end
 
 p multiply_els([2, 4, 5])
 
-# rubocop: enable Metrics/ModuleLength:
-# rubocop: enable Style/For:
-# rubocop: enable Style/CaseEquality:
+# rubocop: enable Metrics/ModuleLength, Style/For, Style/CaseEquality
